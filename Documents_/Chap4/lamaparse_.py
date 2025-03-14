@@ -8,7 +8,7 @@ os.environ["LLAMA_CLOUD_API_KEY"] = os.getenv("LLAMA_CLOUD_API_KEY")
 parser = LlamaParse(result_type="text")
 file_extractor = {".pdf": parser}
 reader = SimpleDirectoryReader(
-    "/home/sakana/PycharmProjects/HealthCareCompanion/Chap4/files",
+    "/Documents_/Chap4/files",
     file_extractor=file_extractor,
 )
 docs = reader.load_data()
@@ -16,3 +16,4 @@ if docs:
     print(docs[0].text[:1000])
 else:
     print("No documents found")
+
