@@ -14,3 +14,5 @@ __pycache__/
 # Ignore logs and temp files
 *.log
 tmp/
+
+MentalHealth/streamlit/secrets.toml
