@@ -8,7 +8,7 @@ from llama_index.llms.openai import OpenAI
 import openai
 import streamlit as st
 
-from Documents_.Chap4.METADATAXtractor import CUSTORM_QUESTION_GEN_TMPL
+from prompts import CUSTORM_QUESTION_GEN_TMPL
 from global_settings import STORAGE_PATH, FILES_PATH, CACHE_FILE
 
 openai.api_key = st.secrets.openai_key.OPENAI_API_KEY
