@@ -15,4 +15,4 @@ __pycache__/
 *.log
 tmp/
 
-MentalHealth/streamlit/secrets.toml
+MentalHealth/.streamlit/secrets.toml

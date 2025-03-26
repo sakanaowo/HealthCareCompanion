@@ -1,6 +1,6 @@
 # tải và tạo mới các index từ các node đầu vào -> lưu trữ trong một folder xác định để sử dụng sau này
 from llama_index.core import VectorStoreIndex, load_index_from_storage, StorageContext
-from global_settings import INDEX_STORAGE
+from .global_settings import INDEX_STORAGE
 
 
 def build_indexes(nodes):

@@ -7,7 +7,7 @@ from llama_index.core.tools import QueryEngineTool, ToolMetadata, FunctionTool
 from llama_index.core.storage.chat_store import SimpleChatStore
 from llama_index.agent.openai import OpenAIAgent
 from global_settings import INDEX_STORAGE, CONVERSATION_FILE, SCORES_FILE
-from prompts import CUSTORM_AGENT_SYSTEM_TEMPLATE
+from .prompts import CUSTORM_AGENT_SYSTEM_TEMPLATE
 
 
 def load_chat_store():

@@ -8,11 +8,26 @@ from llama_index.llms.openai import OpenAI
 import openai
 import streamlit as st
 
-from prompts import CUSTORM_QUESTION_GEN_TMPL
-from global_settings import STORAGE_PATH, FILES_PATH, CACHE_FILE
+from .prompts import CUSTORM_QUESTION_GEN_TMPL
+from .global_settings import STORAGE_PATH, FILES_PATH, CACHE_FILE
 
-openai.api_key = st.secrets.openai_key.OPENAI_API_KEY
+openai.api_key = st.secrets.openai.OPENAI_API_KEY
 Settings.llm = OpenAI(model='gpt-4o-mini', temperature=0.2)  # độ ngẫu nhiên = 0,2
+
+# CUSTORM_QUESTION_GEN_TMPL = """\
+# Here is the context :
+# {context_str}
+#
+# Given the contextual information , \
+# generate {num_questions} questions this context can provide \
+# specific answers to which are unlikely to be found elsewhere .
+#
+# Higher - level summaries of surrounding context may be provided \
+# as well . Try using these summaries to generate better questions \
+# that this context can answer .
+#
+# Lưu ý : Hãy trả về kết quả bằng tiếng iệt.
+# """
 
 # đọc dữ liệu thô bằng Simple Directory Reader
 # id là đường dẫn tuyệt đối -> không thể share

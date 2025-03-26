@@ -1,7 +1,0 @@
-- CACHE_FILE: Đường dẫn file cache cho pipeline, lưu trữ dữ liệu tạm thời sau khi xử lý.
-- CONVERSATION_FILE: Đường dẫn file lưu lịch sử hội thoại của người dùng.
-- STORAGE_PATH: Thư mục chứa dữ liệu đầu vào cần xử lý.
-- FILES_PATH: Danh sách file dữ liệu đầu vào cụ thể, ví dụ tài liệu DSM-5.
-- INDEX_STORAGE: Thư mục lưu trữ các index đã tạo ra.
-- SCORES_FILE: Đường dẫn file lưu điểm số của người dùng.
-- USERS_FILE: Đường dẫn file lưu thông tin người dùng.
