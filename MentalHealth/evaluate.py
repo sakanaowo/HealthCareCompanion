@@ -19,7 +19,8 @@ from src import ingest_pipeline, index_builder
 
 def setup_openai(api_key: str, model: str = "gpt-4o-mini", temperature: float = 0.2):
     openai.api_key = api_key
-    Settings.llm = OpenAI(model=model, temperature=temperature)
+    # Settings.llm = OpenAI(model=model, temperature=temperature)
+    Settings.llm = OpenAI(model=model, temperature=temperature,system_prompt="Only answer based on retrieved documents.")
 
 
 def create_document_and_splitter(text: str, chunk_size: int = 20,
@@ -67,12 +68,12 @@ async def evaluate_async(query_engine, df):
 
 def aggregate_results(df, eval_result):
     data = []
-    for i, quesiton in enumerate(df['query']):
+    for i, question in enumerate(df['query']):
         correctness_result = eval_result['correctness'][i]
         faithfulness_result = eval_result['faithfulness'][i]
         relevancy_result = eval_result['relevancy'][i]
         data.append({
-            'Query': quesiton,
+            'Query': question,
             'Correctness Response': correctness_result.response,
             'Corerctness Passing': correctness_result.passing,
             'Correctness Feedback': correctness_result.feedback,
@@ -94,9 +95,13 @@ def print_average_scores(df):
     correctness_avg = df['Correctness Score'].mean()
     faithfulness_avg = df['Faithfulness Score'].mean()
     relevancy_avg = df['Relevancy Score'].mean()
+
     print(f"Correctness Average Score: {correctness_avg}")
     print(f"Faithfulness Average Score: {faithfulness_avg}")
     print(f"Relevancy Average Score: {relevancy_avg}")
+
+    return correctness_avg, faithfulness_avg, relevancy_avg
+
 
 
 def main():
@@ -112,7 +117,7 @@ def main():
     )
 
     df = generate_questions(nodes)
-    eval_result = asyncio.run(evaluate_async(dsm5_engine, df))
+    eval_result = asyncio.new_event_loop().run_until_complete(evaluate_async(dsm5_engine, df))
     df_result = aggregate_results(df, eval_result)
 
     correctness_scores, faithfulness_scores, relevancy_scores = print_average_scores(df_result)
