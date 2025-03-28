@@ -37,7 +37,7 @@ that this context can answer .
 Lưu ý : Hãy trả về kết quả bằng tiếng iệt.
 """
 
-print(CUSTORM_QUESTION_GEN_TMPL.format(context_str=text, num_questions=3))
+# print(CUSTORM_QUESTION_GEN_TMPL.format(context_str=text, num_questions=3))
 
 #
 # doc = Document(text=text)
@@ -62,3 +62,6 @@ print(CUSTORM_QUESTION_GEN_TMPL.format(context_str=text, num_questions=3))
 # metadata_list = summary_extractor.extract(nodes)
 # for metadata in metadata_list:
 #     print(metadata)
+
+print("LlamaParse API Key:", st.secrets.get("llamaparse", {}).get("LLAMA_CLOUD_API_KEY", "NOT FOUND"))
+
