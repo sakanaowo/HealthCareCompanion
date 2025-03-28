@@ -1,0 +1,3 @@
+Correctness Average Score: 2.408
+Faithfulness Average Score: 0.744
+Relevancy Average Score: 0.936
