@@ -1,3 +1,5 @@
+import os
+
 from llama_index.core import SimpleDirectoryReader
 from llama_index.core.ingestion import IngestionPipeline, IngestionCache
 from llama_index.core.node_parser import TokenTextSplitter
@@ -5,14 +7,21 @@ from llama_index.core.extractors import SummaryExtractor
 from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.core import Settings
 from llama_index.llms.openai import OpenAI
+from llama_parse import LlamaParse
 import openai
 import streamlit as st
+from dotenv import load_dotenv
 
 from .prompts import CUSTORM_QUESTION_GEN_TMPL
 from .global_settings import STORAGE_PATH, FILES_PATH, CACHE_FILE
 
+load_dotenv()
+
+os.environ["LLAMA_CLOUD_API_KEY"] = os.getenv("LLAMA_CLOUD_API_KEY")
+
 openai.api_key = st.secrets.openai.OPENAI_API_KEY
 Settings.llm = OpenAI(model='gpt-4o-mini', temperature=0.2)  # độ ngẫu nhiên = 0,2
+
 
 # CUSTORM_QUESTION_GEN_TMPL = """\
 # Here is the context :
@@ -33,12 +42,15 @@ Settings.llm = OpenAI(model='gpt-4o-mini', temperature=0.2)  # độ ngẫu nhi�
 # id là đường dẫn tuyệt đối -> không thể share
 def ingest_document():
     """Load documents, but cant move or share"""
+    parser = LlamaParse(result_type="text")
+    file_extractor = {".pdf": parser}
     documents = SimpleDirectoryReader(
         input_files=FILES_PATH,
+        file_extractor=file_extractor,
         filename_as_id=True
     ).load_data()
     for doc in documents:
-        print(doc.text)
+        print(doc)
 
     # kiểm tra nếu đã có cache, không có -> tạo mới
     try:
